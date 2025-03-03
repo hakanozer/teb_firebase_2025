@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Register">
+    tools:context=".GsmLogin">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="User Register"
+        android:layout_marginTop="30dp"
+        android:text="GSM Login"
         android:textColor="#E91E63"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,48 +21,46 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/r_username"
+        android:id="@+id/g_gsm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Username"
-        android:inputType="text"
+        android:hint="GSM"
+        android:inputType="number"
         android:textColor="#E91E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/r_password"
+        android:id="@+id/g_code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="Code"
+        android:inputType="number"
         android:textColor="#E91E63"
-        app:layout_constraintEnd_toEndOf="@+id/r_username"
-        app:layout_constraintStart_toStartOf="@+id/r_username"
-        app:layout_constraintTop_toBottomOf="@+id/r_username" />
+        app:layout_constraintEnd_toEndOf="@+id/g_gsm"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/g_sms"
+        app:layout_constraintTop_toBottomOf="@+id/g_sms" />
 
     <Button
-        android:id="@+id/r_btnLogin"
+        android:id="@+id/g_sms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Login"
-        app:layout_constraintStart_toStartOf="@+id/r_password"
-        app:layout_constraintTop_toBottomOf="@+id/r_password" />
+        android:text="Send SMS"
+        app:layout_constraintStart_toStartOf="@+id/g_gsm"
+        app:layout_constraintTop_toBottomOf="@+id/g_gsm" />
 
     <Button
-        android:id="@+id/r_btnRegister"
+        android:id="@+id/g_valid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Register"
-        app:layout_constraintEnd_toEndOf="@+id/r_password"
-        app:layout_constraintTop_toBottomOf="@+id/r_password" />
-
+        android:text="Code Valid"
+        app:layout_constraintStart_toStartOf="@+id/g_code"
+        app:layout_constraintTop_toBottomOf="@+id/g_code" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,11 @@ class Register : AppCompatActivity() {
         val username = r_username.text.toString()
         val password = r_password.text.toString()
 
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Lütfen tüm alanları doldurun.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         auth.createUserWithEmailAndPassword(username, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

@@ -2,6 +2,7 @@ package com.example.project
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +29,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // auth logout
+        auth.signOut()
+
         if (auth.currentUser != null) {
+            Log.d("login", "onCreate: " + auth.currentUser!!.uid)
             startActivity(Intent(this, Dashboard::class.java))
         }else {
             startActivity(Intent(this, Login::class.java))
