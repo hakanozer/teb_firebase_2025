@@ -6,15 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".NoteManager">
+    tools:context=".ContactManager">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_marginTop="10dp"
-        android:text="Nate Save"
+        android:text="Contact Manager"
         android:textColor="#E91E63"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,59 +21,70 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/n_TxtTittle"
+        android:id="@+id/c_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Title"
+        android:hint="Name"
         android:inputType="text"
         android:textColor="#E91E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/n_TxtDetail"
+        android:id="@+id/c_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Detail"
-        android:inputType="text"
+        android:hint="E-Mail"
+        android:inputType="textEmailAddress"
         android:textColor="#E91E63"
-        app:layout_constraintEnd_toEndOf="@+id/n_TxtTittle"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="@+id/n_TxtTittle"
-        app:layout_constraintTop_toBottomOf="@+id/n_TxtTittle" />
+        app:layout_constraintEnd_toEndOf="@+id/c_name"
+        app:layout_constraintStart_toStartOf="@+id/c_name"
+        app:layout_constraintTop_toBottomOf="@+id/c_name" />
+
+    <EditText
+        android:id="@+id/c_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Phone"
+        android:inputType="phone"
+        android:textColor="#E91E63"
+        app:layout_constraintEnd_toEndOf="@+id/c_email"
+        app:layout_constraintStart_toStartOf="@+id/c_email"
+        app:layout_constraintTop_toBottomOf="@+id/c_email" />
 
     <Button
-        android:id="@+id/n_BtnSave"
+        android:id="@+id/c_btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Save"
-        app:layout_constraintStart_toStartOf="@+id/n_TxtDetail"
-        app:layout_constraintTop_toBottomOf="@+id/n_TxtDetail" />
-
-    <ListView
-        android:id="@+id/n_listview"
-        android:layout_width="409dp"
-        android:layout_height="524dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/n_BtnSave" />
+        app:layout_constraintStart_toStartOf="@+id/c_phone"
+        app:layout_constraintTop_toBottomOf="@+id/c_phone" />
 
     <Button
-        android:id="@+id/n_BtnUpdate"
+        android:id="@+id/c_BtnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Update"
-        app:layout_constraintEnd_toEndOf="@+id/n_TxtDetail"
-        app:layout_constraintTop_toBottomOf="@+id/n_TxtDetail" />
+        app:layout_constraintEnd_toEndOf="@+id/c_phone"
+        app:layout_constraintTop_toBottomOf="@+id/c_phone" />
+
+    <ListView
+        android:id="@+id/c_listView"
+        android:layout_width="409dp"
+        android:layout_height="470dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_btnSave" />
 </androidx.constraintlayout.widget.ConstraintLayout>

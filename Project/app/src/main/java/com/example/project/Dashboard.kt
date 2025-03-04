@@ -14,6 +14,7 @@ class Dashboard : AppCompatActivity() {
 
     lateinit var d_logout: Button
     lateinit var d_btnNoteManager: Button
+    lateinit var d_btnContactManager: Button
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,7 @@ class Dashboard : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         d_logout = findViewById(R.id.d_logout)
         d_btnNoteManager = findViewById(R.id.d_btnNoteManager)
+        d_btnContactManager = findViewById(R.id.d_btnContactManager)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -45,6 +47,10 @@ class Dashboard : AppCompatActivity() {
 
         d_btnNoteManager.setOnClickListener {
             startActivity(Intent(this, NoteManager::class.java))
+        }
+
+        d_btnContactManager.setOnClickListener {
+            startActivity(Intent(this, ContactManager::class.java))
         }
 
     }
