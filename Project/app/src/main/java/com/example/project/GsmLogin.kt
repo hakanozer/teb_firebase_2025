@@ -1,6 +1,8 @@
 package com.example.project
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -45,7 +47,8 @@ class GsmLogin : AppCompatActivity() {
         }
 
         g_sms.setOnClickListener {
-            val phoneNumber = g_gsm.text.toString()
+            val phoneNumber = "+90"+g_gsm.text.toString()
+            Log.d("sms", "onCreate: $phoneNumber")
             if (phoneNumber.isNotEmpty()) {
                 sendVerificationCode(phoneNumber)
             } else {
@@ -75,6 +78,7 @@ class GsmLogin : AppCompatActivity() {
                 }
 
                 override fun onVerificationFailed(p0: FirebaseException) {
+                    Log.d("sms", "onVerificationFailed: ${p0.message}")
                     Toast.makeText(this@GsmLogin, "Doğrulama başarısız: ${p0.message}", Toast.LENGTH_LONG).show()
 
                 }
@@ -99,6 +103,7 @@ class GsmLogin : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Giriş başarılı", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, Dashboard::class.java))
                 } else {
                     Toast.makeText(this, "Giriş başarısız", Toast.LENGTH_SHORT).show()
                 }

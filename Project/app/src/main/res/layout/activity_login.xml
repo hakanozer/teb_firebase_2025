@@ -29,6 +29,7 @@
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
+        android:text="yedekhakan1@gmail.com"
         android:textColor="#E91E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // auth logout
-        auth.signOut()
+        // auth.signOut()
 
         if (auth.currentUser != null) {
             Log.d("login", "onCreate: " + auth.currentUser!!.uid)
