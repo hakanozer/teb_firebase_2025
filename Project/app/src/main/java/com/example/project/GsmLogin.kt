@@ -15,9 +15,11 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
+
 class GsmLogin : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private var verificationId: String? = null
 
     lateinit var g_gsm: EditText
     lateinit var g_code: EditText
@@ -43,40 +45,64 @@ class GsmLogin : AppCompatActivity() {
         }
 
         g_sms.setOnClickListener {
-            val gsm = g_gsm.text.toString()
-            if (gsm.isEmpty()) {
-                g_gsm.error = "Lütfen GSM numaranızı giriniz."
-                return@setOnClickListener
+            val phoneNumber = g_gsm.text.toString()
+            if (phoneNumber.isNotEmpty()) {
+                sendVerificationCode(phoneNumber)
+            } else {
+                Toast.makeText(this, "Telefon numarası giriniz", Toast.LENGTH_SHORT).show()
             }
+        }
 
-            val gmsOption = PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber("+90$gsm")
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this)
-                .setCallbacks(object: PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    override fun onVerificationCompleted(p0: PhoneAuthCredential) {
-                        auth.signInWithCredential(p0)
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    Toast.makeText(
-                                        this@GsmLogin,
-                                        "Login success",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    Toast.makeText(this@GsmLogin, "Login fail", Toast.LENGTH_SHORT)
-                                        .show()
-                                }
-                            }
-                    }
-
-                    override fun onVerificationFailed(p0: FirebaseException) {
-                        Toast.makeText(this@GsmLogin, "Sms send Fail", Toast.LENGTH_SHORT).show()
-                    }
-                }).build()
-            PhoneAuthProvider.verifyPhoneNumber(gmsOption)
-
+        g_valid.setOnClickListener {
+            val code = g_code.text.toString()
+            if (code.isNotEmpty()) {
+                verificationId?.let { verifyCode(it, code) }
+            } else {
+                Toast.makeText(this, "Kod giriniz", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
+
+    private fun sendVerificationCode(phoneNumber: String) {
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(phoneNumber)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(this)
+            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                    signInWithCredential(credential)
+                }
+
+                override fun onVerificationFailed(p0: FirebaseException) {
+                    Toast.makeText(this@GsmLogin, "Doğrulama başarısız: ${p0.message}", Toast.LENGTH_LONG).show()
+
+                }
+
+                override fun onCodeSent(id: String, token: PhoneAuthProvider.ForceResendingToken) {
+                    super.onCodeSent(id, token)
+                    verificationId = id
+                    Toast.makeText(this@GsmLogin, "Kod gönderildi", Toast.LENGTH_SHORT).show()
+                }
+            })
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    private fun verifyCode(verificationId: String, code: String) {
+        val credential = PhoneAuthProvider.getCredential(verificationId, code)
+        signInWithCredential(credential)
+    }
+
+    private fun signInWithCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Giriş başarılı", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Giriş başarısız", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
 }
